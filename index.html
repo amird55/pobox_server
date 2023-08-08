@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Table</title>
+  <style>
+    body{direction: rtl;}
+    td{border: 1px solid black;}
+    th{background-color: aqua;}
+    tbody tr:nth-child(even) {background-color: lightgray;}
+    tbody tr:hover{background-color: yellow;}
+  </style>
+</head>
+<body>
+<h1>My Table</h1>
+<input type="search" id="filterField" oninput="CreateTble();">
+<table>
+  <thead>
+  <tr>
+    <th>שם</th>
+    <th>טלפון</th>
+    <th>תיבה</th>
+  </tr>
+  </thead>
+  <tbody id="mainTable">  </tbody>
+</table>
+<script>
+  let raw_data=[
+    {name:"aa"  ,phone:"555",pobox:"22"},
+    {name:"bab" ,phone:"556",pobox:"23"},
+    {name:"cbc" ,phone:"557",pobox:"24"},
+    {name:"dd"  ,phone:"558",pobox:"25"},
+    {name:"ee"  ,phone:"559",pobox:"26"},
+    {name:"aabb",phone:"550",pobox:"27"}
+  ];
+  let srchTerm="";
+
+  function FilterData(el){
+    console.log("FilterData::",el);
+    if(srchTerm=="")
+      return true;
+    let reg=new RegExp(srchTerm,"i");
+    if(reg.test(el.name)){
+      return true;
+    }
+    return false;
+  }
+  function CreateTble(){
+    srchTerm=document.getElementById("filterField").value;
+    let data=raw_data.filter(FilterData);
+    let str="";
+    for(let line of data){
+      str+="<tr>";
+      str+="<td>"+line.name+"</td>";
+      str+=`<td>${line.phone}</td>`;
+      str+=`<td>${line.pobox}</td>`;
+      str+="</tr>";
+    }
+    document.getElementById("mainTable").innerHTML=str;
+  }
+  CreateTble();
+
+
+
+</script>
+</body>
+</html>
