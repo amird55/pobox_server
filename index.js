@@ -12,7 +12,7 @@ let AllData=[];
 
 //------------------------------------------------
 app.get("/",(req, res) => {
-    res.sendFile("./main.html", {root: __dirname});
+    res.sendFile("./index.html", {root: __dirname});
 });
 app.get("/List",(req, res) => {
     res.send(AllData).json();

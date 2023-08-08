@@ -27,15 +27,9 @@
   </thead>
   <tbody id="mainTable">  </tbody>
 </table>
+<button onclick="fetchText();">fetch</button>
 <script>
-  let raw_data=[
-    {name:"aa"  ,phone:"555",pobox:"22"},
-    {name:"bab" ,phone:"556",pobox:"23"},
-    {name:"cbc" ,phone:"557",pobox:"24"},
-    {name:"dd"  ,phone:"558",pobox:"25"},
-    {name:"ee"  ,phone:"559",pobox:"26"},
-    {name:"aabb",phone:"550",pobox:"27"}
-  ];
+  let raw_data=[];
   let srchTerm="";
 
   function FilterData(el){
@@ -60,6 +54,15 @@
       str+="</tr>";
     }
     document.getElementById("mainTable").innerHTML=str;
+  }
+
+  async function fetchText() {
+    let response = await fetch('/List');
+    // console.log("response=",response);
+    let data = await response.json();
+    console.log("data=",data);
+    raw_data = data;
+    CreateTble();
   }
   CreateTble();
 
